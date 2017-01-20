@@ -30,6 +30,9 @@ config :chat, Chat.Endpoint,
         {"/socket/websocket", Phoenix.Endpoint.Cowboy2WebSocket,
          {Chat.Transports.WebSocket,
           {Chat.Endpoint, Chat.UserSocket, :websocket}}},
+        {"/phoenix/live_reload/socket/websocket", Phoenix.Endpoint.Cowboy2WebSocket,
+         {Chat.Transports.WebSocket,
+          {Chat.Endpoint, Phoenix.LiveReloader.Socket, :websocket}}},
         {:_, Plug.Adapters.Cowboy2.Handler, {Chat.Endpoint, []}}
         ]}]
   ],
