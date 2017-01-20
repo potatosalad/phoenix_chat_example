@@ -104,6 +104,14 @@ defmodule Chat.Transports.WebSocket do
 
     if socket.id, do: socket.endpoint.subscribe(socket.id, link: true)
 
+    # FIXME: Is this really necessary for cowboy 2.x using :switch_protocol?
+    socket =
+      if socket.transport_pid !== self() do
+        %{socket | transport_pid: self()}
+      else
+        socket
+      end
+
     {:ok, %{socket: socket,
             channels: %{},
             channels_inverse: %{},
