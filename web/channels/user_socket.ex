@@ -3,7 +3,7 @@ defmodule Chat.UserSocket do
 
   channel "rooms:*", Chat.RoomChannel
 
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport :websocket, Chat.Transports.WebSocket
   transport :longpoll, Phoenix.Transports.LongPoll
 
   def connect(_params, socket) do

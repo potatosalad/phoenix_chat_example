@@ -1,9 +1,14 @@
-import {Socket, LongPoller} from "phoenix"
+import {Socket, LongPoll} from "phoenix"
 
 class App {
 
   static init(){
+    let transport = null;
+    if (window.location.search.indexOf("longpoll") !== -1) {
+      transport = LongPoll;
+    }
     let socket = new Socket("/socket", {
+      transport: transport,
       logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data) })
     })
 
