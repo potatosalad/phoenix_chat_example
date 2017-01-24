@@ -15,7 +15,7 @@ defmodule Chat.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Chat, []},
-     applications: [:phoenix, :phoenix_html, :phoenix_cowboy2, :logger, :ranch, :cowlib, :cowboy, :postgrex]]
+     applications: [:phoenix, :phoenix_html, :plug_cowboy2, :phoenix_cowboy2, :logger, :ranch, :cowlib, :cowboy, :postgrex]]
   end
 
   # Specifies your project dependencies
@@ -25,6 +25,7 @@ defmodule Chat.Mixfile do
     [{:phoenix, "~> 1.2"},
      {:phoenix_html, "~> 2.5"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:plug_cowboy2, github: "voicelayer/plug_cowboy2", ref: "temp/skip-sendfile", override: true},
      {:phoenix_cowboy2, github: "voicelayer/phoenix_cowboy2"},
      {:ranch, github: "ninenines/ranch", ref: "1.3.0", override: true},
      {:cowlib, github: "ninenines/cowlib", ref: "master", override: true},
