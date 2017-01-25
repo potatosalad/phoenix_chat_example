@@ -26,7 +26,7 @@ defmodule Chat.Mixfile do
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:phoenix_chatterbox, path: "../phoenix_chatterbox"},
+     {:phoenix_chatterbox, github: "potatosalad/phoenix_chatterbox"},
      {:ranch, github: "ninenines/ranch", ref: "1.3.0", override: true},
      {:gettext, "~> 0.11"},
      {:lager_logger, "~> 1.0.3"}]
