@@ -13,7 +13,6 @@ unless File.exists?(keyfile) do
   """
 end
 
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -24,24 +23,14 @@ config :chat, Chat.Endpoint,
   https: [
     port: 4001,
     certfile: certfile,
-    keyfile: keyfile,
-    dispatch: [
-      {:_, [
-        {"/socket/websocket", Phoenix.Endpoint.Cowboy2WebSocket,
-         {Chat.Transports.WebSocket,
-          {Chat.Endpoint, Chat.UserSocket, :websocket}}},
-        {"/socket/longpoll", Plug.Adapters.Cowboy2.Handler,
-         {Phoenix.Transports.LongPoll,
-          {Chat.Endpoint, Chat.UserSocket, :longpoll}}},
-        {"/phoenix/live_reload/socket/websocket", Phoenix.Endpoint.Cowboy2WebSocket,
-         {Chat.Transports.WebSocket,
-          {Chat.Endpoint, Phoenix.LiveReloader.Socket, :websocket}}},
-        {:_, Plug.Adapters.Cowboy2.Handler, {Chat.Endpoint, []}}
-        ]}]
+    keyfile: keyfile
   ],
-  handler: Phoenix.Endpoint.Cowboy2Handler,
+  http: [
+    port: 4002
+  ],
+  handler: Phoenix.Endpoint.ChatterboxHandler,
   debug_errors: true,
-  code_reloader: true,
+  code_reloader: false,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]

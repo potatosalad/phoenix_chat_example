@@ -6,8 +6,8 @@ defmodule Chat.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: ["lib", "web"],
-     compilers: [:phoenix] ++ Mix.compilers,
-     deps: deps]
+     compilers: [:phoenix] ++ Mix.compilers(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -15,21 +15,20 @@ defmodule Chat.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Chat, []},
-     applications: [:phoenix, :phoenix_html, :plug_cowboy2, :phoenix_cowboy2, :logger, :ranch, :cowlib, :cowboy, :postgrex]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :phoenix_chatterbox, :logger, :gettext, :ranch, :chatterbox]]
   end
 
   # Specifies your project dependencies
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.2"},
-     {:phoenix_html, "~> 2.5"},
+    [{:phoenix, "~> 1.2.1"},
+     {:phoenix_pubsub, "~> 1.0"},
+     {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:plug_cowboy2, github: "voicelayer/plug_cowboy2", ref: "temp/skip-sendfile", override: true},
-     {:phoenix_cowboy2, github: "voicelayer/phoenix_cowboy2"},
+     {:phoenix_chatterbox, path: "../phoenix_chatterbox"},
      {:ranch, github: "ninenines/ranch", ref: "1.3.0", override: true},
-     {:cowlib, github: "ninenines/cowlib", ref: "master", override: true},
-     {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-pre.4", override: true},
-     {:postgrex, "~> 0.12.1"}]
+     {:gettext, "~> 0.11"},
+     {:lager_logger, "~> 1.0.3"}]
   end
 end
